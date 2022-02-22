@@ -1,0 +1,77 @@
+.headerContainer {
+  width: 100%;
+  padding: 0.5rem 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  // background-image: linear-gradient(var(--background-gradient-angle), var(--background-gradient));
+  box-shadow: var(--shadow-elevation-low);
+}
+
+.logoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: 3rem;
+  cursor: pointer;
+
+  h1 {
+    margin-left: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}
+
+.controlPanelContainer {
+  margin-right: 5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      color: #ba141b;
+      background: -webkit-gradient(
+        linear,
+        left top,
+        right top,
+        color-stop(32%, #ba141b),
+        color-stop(100%, #ec1b2f)
+      );
+      background: -webkit-linear-gradient(left, #ba141b 32%, #ec1b2f 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    &::after {
+      content: '';
+      position: relative;
+      left: 0;
+      bottom: -10px;
+      display: block;
+      width: 100%;
+      margin-bottom: -3px;
+      border-bottom: 3px solid transparent;
+      transition: border-bottom ease-in-out 0.2s;
+      transition: bottom ease-in-out 0.2s;
+    }
+
+    &:hover::after {
+      bottom: 0;
+      border-bottom: 3px solid var(--accent-color);
+    }
+  }
+}
