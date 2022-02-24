@@ -1,5 +1,5 @@
-import { type } from 'os';
 import { ReactElement } from 'react';
+import Image from 'next/image';
 import styles from './DeviceCard.module.scss';
 
 type DeviceType = 'bulb' | 'outlet' | 'temperatureSensor';
@@ -18,6 +18,7 @@ interface DeviceCardProps {
   id: string;
   name: string;
   connectionState: ConnectionStateType;
+  image: any;
   isTurnedOn: boolean;
   brightness?: BrightnessType;
   color?: string;
@@ -30,6 +31,7 @@ export default function DeviceCard({
   id,
   name,
   connectionState,
+  image,
   isTurnedOn,
   brightness,
   color,
@@ -45,9 +47,14 @@ export default function DeviceCard({
 
   return (
     <div className={styles.cardContainer}>
+      <Image width={44} height={44} src={image.src} />
       <p className={styles.deviceName}>{name}</p>
       <p className={styles.deviceID}>ID: {id}</p>
-      <p className={styles.connectionState}>Connection: {connectionStatus}.</p>
+      <p className={styles.connectionState}>
+        {/* text description for the screen readers */}
+        <span className={styles.visuallyHidden}>Connection: {connectionStatus}.</span>
+        <div className={`${styles.connectionStateIcon} ${styles[connectionState]}`}></div>
+      </p>
     </div>
   );
 }

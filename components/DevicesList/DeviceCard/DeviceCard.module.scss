@@ -1,14 +1,15 @@
 .cardContainer {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  height: 30rem;
-  width: 20rem;
-  padding: 1rem 1rem;
+  min-height: 10rem;
+  height: min-content;
+  width: 12rem;
+  padding: 1rem 0;
   margin: 1rem 1rem;
-  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-elevation-low);
   cursor: pointer;
@@ -18,8 +19,14 @@
   }
 }
 
+.cardHeader {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--accent-color);
+}
+
 .deviceName {
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   font-weight: 700;
 }
 
@@ -27,4 +34,34 @@
   margin-top: -5px;
   font-size: 0.7rem;
   color: var(--gray);
+}
+
+.connectionStateIcon {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  width: 1rem;
+  height: 1rem;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.connected {
+  background-color: green;
+}
+.disconnected {
+  background-color: red;
+}
+.poorConnection {
+  background-color: yellow;
+}
+
+.visuallyHidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
