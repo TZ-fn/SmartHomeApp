@@ -5,7 +5,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--border-color);
   // background-image: linear-gradient(var(--background-gradient-angle), var(--background-gradient));
   box-shadow: var(--shadow-elevation-low);
 }
@@ -66,8 +65,8 @@
       width: 100%;
       margin-bottom: -3px;
       border-bottom: 3px solid transparent;
-      transition: border-bottom ease-in-out 0.3s;
-      transition: bottom ease-in-out 0.3s;
+      transition: border-bottom ease-in-out 0.2s;
+      transition: bottom ease-in-out 0.2s;
     }
 
     &:hover::after {
