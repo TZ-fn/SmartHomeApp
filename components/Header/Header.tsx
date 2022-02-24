@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import Image from 'next/image';
 import SmartHomeLogo from '../../public/reshot-icon-home-UKNYQCE6B2.svg';
-import LoginIcon from '../../public/reshot-icon-create-user-RGEUQASVK2.svg';
-import SettingsIcon from '../../public/reshot-icon-settings-MDHEAFCKRV.svg';
+import LoginIcon from '../../public/icons/reshot-icon-create-user-RGEUQASVK2.svg';
+import SettingsIcon from '../../public/icons/reshot-icon-settings-MDHEAFCKRV.svg';
 import styles from './Header.module.scss';
 
 export default function Header(): ReactElement {
