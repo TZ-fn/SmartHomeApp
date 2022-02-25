@@ -6,6 +6,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
     'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   background-color: var(--white);
+
+  /* this removes scroll bars when modal will be moved outside the viewport */
+  overflow: hidden;
 }
 
 /*

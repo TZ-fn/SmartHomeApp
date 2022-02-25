@@ -7,6 +7,7 @@
   justify-content: space-between;
   background-image: var(--background-gradient);
   box-shadow: var(--shadow-elevation-low);
+  border: 1px solid var(--border-color);
 
   @media (max-width: 470px) {
     flex-direction: column;
