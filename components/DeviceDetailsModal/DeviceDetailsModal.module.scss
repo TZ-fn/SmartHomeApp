@@ -1,0 +1,14 @@
+.modalContainer {
+  position: absolute;
+  top: 20%;
+  right: 40%;
+  height: 30rem;
+  width: 22rem;
+  padding: 1rem;
+  background-image: var(--background-gradient);
+  box-shadow: var(--shadow-elevation-medium);
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  border: 1px solid var(--border-color);
+}
