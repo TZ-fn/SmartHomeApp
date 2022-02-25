@@ -47,7 +47,7 @@ export default function DeviceCard({
 
   return (
     <div className={styles.cardContainer}>
-      <Image width={44} height={44} src={image.src} />
+      <Image width={55} height={55} src={image.src} />
       <p className={styles.deviceName}>{name}</p>
       <p className={styles.deviceID}>ID: {id}</p>
       <p className={styles.connectionState}>
