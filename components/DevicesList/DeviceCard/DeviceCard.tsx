@@ -53,7 +53,7 @@ export default function DeviceCard({
       <p className={styles.connectionState}>
         {/* text description for the screen readers */}
         <span className={styles.visuallyHidden}>Connection: {connectionStatus}.</span>
-        <div className={`${styles.connectionStateIcon} ${styles[connectionState]}`}></div>
+        <span className={`${styles.connectionStateIcon} ${styles[connectionState]}`}></span>
       </p>
     </div>
   );
