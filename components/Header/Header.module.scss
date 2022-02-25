@@ -5,8 +5,16 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  // background-image: linear-gradient(var(--background-gradient-angle), var(--background-gradient));
+  background-image: var(--background-gradient);
   box-shadow: var(--shadow-elevation-low);
+
+  @media (max-width: 470px) {
+    flex-direction: column;
+
+    img {
+      width: 30%;
+    }
+  }
 }
 
 .logoContainer {
@@ -72,6 +80,17 @@
     &:hover::after {
       bottom: 0;
       border-bottom: 3px solid var(--accent-color);
+    }
+  }
+}
+
+.logoContainer,
+.controlPanelContainer {
+  @media (max-width: 690px) {
+    margin: 0 0;
+
+    h1 {
+      font-size: 1.3rem;
     }
   }
 }
