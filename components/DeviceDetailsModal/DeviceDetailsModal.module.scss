@@ -12,3 +12,66 @@
   user-select: none;
   border: 1px solid var(--border-color);
 }
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalDeviceName {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.modalDeviceID {
+  margin-top: -2rem;
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.modalConnectionState {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalConnectionStateIcon {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 1rem;
+  height: 1rem;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.modalConnectionStateText {
+  margin-left: 0.3rem;
+  font-weight: 600;
+}
+
+.connected {
+  background-color: green;
+}
+.disconnected {
+  background-color: red;
+}
+.poorConnection {
+  background-color: yellow;
+}
+
+.textConnected {
+  color: green;
+}
+.textDisconnected {
+  color: red;
+}
+.textPoorConnection {
+  color: yellow;
+}
