@@ -22,8 +22,11 @@ export default function DeviceDetailsModal(): ReactElement {
   }, []);
 
   return (
-    <div className={`${styles.modalContainer} draggable`}>
+    <div className={`${styles.modalContainer} draggable resizable`}>
       <div className={styles.modal}>
+        <button type='button' className={styles.closeModalButton}>
+          X
+        </button>
         <p className={styles.modalDeviceName}>Smart Temperature Sensor</p>
         <p className={styles.modalDeviceID}>ID: E78C0467EF</p>
         <p className={styles.modalConnectionState}>
