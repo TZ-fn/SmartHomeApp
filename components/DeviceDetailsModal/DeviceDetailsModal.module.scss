@@ -24,11 +24,17 @@
   position: absolute;
   right: 10px;
   top: 10px;
-  width: 2rem;
-  height: 2rem;
+  width: 1.6rem;
+  height: 1.6rem;
   padding: 0;
   background-color: transparent;
-  border: 1px solid black;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--light-gray);
+  }
 }
 
 .modalDeviceName {
