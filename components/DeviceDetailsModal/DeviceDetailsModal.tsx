@@ -1,30 +1,53 @@
-import { ReactElement, useEffect, useState } from 'react';
+import { Dispatch, MouseEventHandler, ReactElement, SetStateAction, useEffect } from 'react';
 import interact from 'interactjs';
 import styles from './DeviceDetailsModal.module.scss';
 import { DragEvent } from '@interactjs/types';
 
-export default function DeviceDetailsModal(): ReactElement {
-  const [position, setPosition] = useState({ x: 150, y: 100 });
+interface DeviceDetailsModalProps {
+  isModalVisible: boolean;
+  handleClose: MouseEventHandler;
+  modalPosition: { x: number; y: number };
+  setModalPosition: Dispatch<
+    SetStateAction<{
+      x: number;
+      y: number;
+    }>
+  >;
+}
 
+export default function DeviceDetailsModal({
+  handleClose,
+  isModalVisible,
+  modalPosition,
+  setModalPosition,
+}: DeviceDetailsModalProps): ReactElement | null {
   useEffect(() => {
     let draggableModal = interact('.draggable');
     if (draggableModal !== undefined) {
       draggableModal.draggable({
         listeners: {
+          start(event: DragEvent) {
+            event.target.style.transform = `translate(${modalPosition.x}px, ${modalPosition.y}px)`;
+          },
           move(event: DragEvent) {
-            setPosition({ ...position, x: (position.x += event.dx) });
-            setPosition({ ...position, y: (position.y += event.dy) });
-            event.target.style.transform = `translate(${position.x}px, ${position.y}px)`;
+            setModalPosition({ ...modalPosition, x: (modalPosition.x += event.dx) });
+            setModalPosition({ ...modalPosition, y: (modalPosition.y += event.dy) });
+            event.target.style.transform = `translate(${modalPosition.x}px, ${modalPosition.y}px)`;
           },
         },
       });
     }
   }, []);
 
-  return (
+  return isModalVisible ? (
     <div className={`${styles.modalContainer} draggable resizable`}>
       <div className={styles.modal}>
-        <button className={styles.closeModalButton} type='button' aria-label='Close this window.'>
+        <button
+          onClick={handleClose}
+          className={styles.closeModalButton}
+          type='button'
+          aria-label='Close this window.'
+        >
           <span aria-hidden='true'>×</span>
         </button>
         <p className={styles.modalDeviceName}>Smart Temperature Sensor</p>
@@ -38,5 +61,5 @@ export default function DeviceDetailsModal(): ReactElement {
         </p>
       </div>
     </div>
-  );
+  ) : null;
 }
