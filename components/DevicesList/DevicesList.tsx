@@ -8,17 +8,13 @@ import DeviceDetailsModal from '../DeviceDetailsModal/DeviceDetailsModal';
 
 export default function DevicesList(): ReactElement {
   const [isDeviceDetailsModalVisible, setIsDeviceDetailsModalVisible] = useState(true);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleModalClose = () => setIsDeviceDetailsModalVisible(false);
-  console.log(position);
   return (
     <>
       <DeviceDetailsModal
         isModalVisible={isDeviceDetailsModalVisible}
         handleClose={handleModalClose}
-        modalPosition={position}
-        setModalPosition={setPosition}
       />
       <button
         type='button'
