@@ -12,7 +12,7 @@ export default function DeviceDetailsModal({
   isModalVisible,
 }: DeviceDetailsModalProps): ReactElement | null {
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
-  const [modalSize, setModalSize] = useState({ x: 0, y: 0 });
+  const [modalSize, setModalSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     interact('.resize-drag')
@@ -21,14 +21,13 @@ export default function DeviceDetailsModal({
         listeners: {
           move(event) {
             const target = event.target;
-            let x = parseFloat(target.getAttribute('data-x')) || modalSize.x;
-            let y = parseFloat(target.getAttribute('data-y')) || modalSize.y;
+            let x = parseFloat(target.getAttribute('data-x')) || 0;
+            let y = parseFloat(target.getAttribute('data-y')) || 0;
             target.style.width = event.rect.width + 'px';
             target.style.height = event.rect.height + 'px';
+            setModalSize({ width: event.rect.width, height: event.rect.height });
             x += event.deltaRect.right;
             y += event.deltaRect.top;
-            setModalSize({ x, y });
-            console.log(modalSize);
             target.style.transform = `translate(${x}px, ${y}px)`;
             target.setAttribute('data-x', x);
             target.setAttribute('data-y', y);
@@ -48,39 +47,6 @@ export default function DeviceDetailsModal({
           },
         },
       });
-
-    // let resizableModal = interact('.resizable');
-    // if (resizableModal !== undefined) {
-    //   resizableModal.resizable({
-    //     edges: { top: false, left: false, bottom: true, right: true },
-    //     listeners: {
-    //       move: function (event) {
-    //         let { x, y } = event.target.dataset;
-    //         x = (parseFloat(x) || 0) + event.deltaRect.right;
-    //         y = (parseFloat(y) || 0) + event.deltaRect.top;
-    //         Object.assign(event.target.style, {
-    //           width: `${event.rect.width}px`,
-    //           height: `${event.rect.height}px`,
-    //           transform: `translate(${x}px, ${y}px)`,
-    //         });
-    //         Object.assign(event.target.dataset, { x, y });
-    //       },
-    //     },
-    //   });
-    // }
-
-    // let draggableModal = interact('.draggable');
-    // if (draggableModal !== undefined) {
-    //   draggableModal.draggable({
-    //     listeners: {
-    //       move(event: DragEvent) {
-    //         setModalPosition({ ...modalPosition, x: (modalPosition.x += event.dx) });
-    //         setModalPosition({ ...modalPosition, y: (modalPosition.y += event.dy) });
-    //         event.target.style.transform = `translate(${modalPosition.x}px, ${modalPosition.y}px)`;
-    //       },
-    //     },
-    //   });
-    // }
   }, [modalPosition, modalSize]);
 
   return isModalVisible ? (
@@ -88,6 +54,8 @@ export default function DeviceDetailsModal({
       className={`${styles.modalContainer} resize-drag`}
       style={{
         transform: `translate(${modalPosition.x}px, ${modalPosition.y}px)`,
+        width: modalSize.width,
+        height: modalSize.height,
       }}
     >
       <div className={styles.modal}>

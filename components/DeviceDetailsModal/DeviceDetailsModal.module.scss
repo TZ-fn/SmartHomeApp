@@ -4,9 +4,9 @@
   right: 40%;
   z-index: 10;
   height: 35rem;
-  min-height: min-content;
+  min-height: 30rem;
   width: 25rem;
-  min-width: 12rem;
+  min-width: 20rem;
   padding: 1rem;
   background-image: var(--background-gradient);
   box-shadow: var(--shadow-elevation-medium);
@@ -41,7 +41,7 @@
 }
 
 .modalDeviceName {
-  margin-top: 2rem;
+  margin-top: 3rem;
   margin-bottom: 2rem;
   font-size: 1.3rem;
   font-weight: 700;
@@ -63,8 +63,8 @@
 
 .modalConnectionStateIcon {
   position: absolute;
-  left: 20px;
-  top: 20px;
+  left: 13px;
+  top: 13px;
   width: 1.5rem;
   height: 1.5rem;
   background-color: transparent;
