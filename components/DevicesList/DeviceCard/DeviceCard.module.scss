@@ -51,13 +51,13 @@
 }
 
 .connected {
-  background-color: green;
+  background-color: var(--color-connected);
 }
 .disconnected {
-  background-color: red;
+  background-color: var(--color-disconnected);
 }
 .poorConnection {
-  background-color: yellow;
+  background-color: var(--color-poor-connection);
 }
 
 .visuallyHidden {

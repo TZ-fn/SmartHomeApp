@@ -1,18 +1,47 @@
 import { MouseEventHandler, ReactElement, useEffect, useState } from 'react';
 import interact from 'interactjs';
 import styles from './DeviceDetailsModal.module.scss';
+import { connectionStateMatcher } from '../utils/connectionStateMatcher';
+
+type ConnectionStateType = 'connected' | 'disconnected' | 'poorConnection';
+
+type _Range<T extends number, R extends unknown[]> = R['length'] extends T
+  ? R[number]
+  : _Range<T, [R['length'], ...R]>;
+type Range<T extends number> = number extends T ? number : _Range<T, []>;
+
+type BrightnessType = Range<100>;
 
 interface DeviceDetailsModalProps {
   isModalVisible: boolean;
   handleClose: MouseEventHandler;
+  connectionState: ConnectionStateType;
+  isTurnedOn: boolean;
+  brightness?: BrightnessType;
+  color?: string;
+  powerConsumption?: number;
+  temperature?: number;
 }
 
 export default function DeviceDetailsModal({
   handleClose,
   isModalVisible,
+  connectionState,
+  isTurnedOn,
+  brightness,
+  color,
+  powerConsumption,
+  temperature,
 }: DeviceDetailsModalProps): ReactElement | null {
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const [modalSize, setModalSize] = useState({ width: 0, height: 0 });
+
+  const setConnectionStatusColor =
+    connectionState === 'connected'
+      ? 'textConnected'
+      : connectionState === 'disconnected'
+      ? 'textDisconnected'
+      : 'textPoorConnection';
 
   useEffect(() => {
     interact('.resize-drag')
@@ -71,11 +100,18 @@ export default function DeviceDetailsModal({
         <p className={styles.modalDeviceID}>ID: E78C0467EF</p>
         <p className={styles.modalConnectionState}>
           Connection:
-          <span className={`${styles.modalConnectionStateText} ${styles.textConnected}`}>
-            connected
+          <span
+            className={`${styles.modalConnectionStateText} ${styles[setConnectionStatusColor]}`}
+          >
+            {connectionStateMatcher(connectionState)}
           </span>
-          .<span className={`${styles.modalConnectionStateIcon} ${styles.connected}`}></span>
+          .<span className={`${styles.modalConnectionStateIcon} ${styles[connectionState]}`}></span>
         </p>
+        <p>isTurnedOn</p>
+        <p>brightness</p>
+        <p>color</p>
+        <p>powerConsumption</p>
+        <p>temperature</p>
       </div>
     </div>
   ) : null;

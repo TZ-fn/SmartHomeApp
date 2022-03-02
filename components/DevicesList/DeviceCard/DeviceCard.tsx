@@ -1,29 +1,20 @@
 import { ReactElement } from 'react';
 import Image from 'next/image';
 import styles from './DeviceCard.module.scss';
+import BulbIcon from '../../../public/icons/reshot-icon-electric-bulb-BZU4KM2VQA.svg';
+import OutletIcon from '../../../public/icons/reshot-icon-plug-and-socket-ANZ3VHW8SC.svg';
+import TemperatureSensorIcon from '../../../public/icons/reshot-icon-thermometer-45AGZRX8JW.svg';
+import { connectionStateMatcher } from '../../utils/connectionStateMatcher';
 
 type DeviceType = 'bulb' | 'outlet' | 'temperatureSensor';
 
 type ConnectionStateType = 'connected' | 'disconnected' | 'poorConnection';
-
-type _Range<T extends number, R extends unknown[]> = R['length'] extends T
-  ? R[number]
-  : _Range<T, [R['length'], ...R]>;
-type Range<T extends number> = number extends T ? number : _Range<T, []>;
-
-type BrightnessType = Range<100>;
 
 interface DeviceCardProps {
   type: DeviceType;
   id: string;
   name: string;
   connectionState: ConnectionStateType;
-  image: any;
-  isTurnedOn: boolean;
-  brightness?: BrightnessType;
-  color?: string;
-  powerConsumption?: number;
-  temperature?: number;
 }
 
 export default function DeviceCard({
@@ -31,28 +22,31 @@ export default function DeviceCard({
   id,
   name,
   connectionState,
-  image,
-  isTurnedOn,
-  brightness,
-  color,
-  powerConsumption,
-  temperature,
 }: DeviceCardProps): ReactElement {
-  const connectionStatus =
-    connectionState === 'connected'
-      ? 'connected successfully'
-      : connectionState === 'disconnected'
-      ? 'disconnected'
-      : 'connection poor';
+  const selectIconType = (type: DeviceType): any => {
+    // I decided to use a switch statement to make adding new devices' types easier
+    switch (type) {
+      case 'bulb':
+        return BulbIcon.src;
+      case 'outlet':
+        return OutletIcon.src;
+      case 'temperatureSensor':
+        return TemperatureSensorIcon.src;
+      default:
+        throw new Error('Unsupported device type.');
+    }
+  };
 
   return (
     <div className={styles.cardContainer}>
-      <Image width={55} height={55} src={image.src} />
+      <Image width={55} height={55} src={selectIconType(type)} />
       <p className={styles.deviceName}>{name}</p>
       <p className={styles.deviceID}>ID: {id}</p>
       <p className={styles.connectionState}>
         {/* text description for the screen readers */}
-        <span className={styles.visuallyHidden}>Connection: {connectionStatus}.</span>
+        <span className={styles.visuallyHidden}>
+          Connection: {connectionStateMatcher(connectionState)}.
+        </span>
         <span className={`${styles.connectionStateIcon} ${styles[connectionState]}`}></span>
       </p>
     </div>
