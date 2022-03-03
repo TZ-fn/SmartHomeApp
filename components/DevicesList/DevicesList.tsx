@@ -3,7 +3,6 @@ import DeviceCard from './DeviceCard/DeviceCard';
 import styles from './DevicesList.module.scss';
 import DeviceDetailsModal from '../DeviceDetailsModal/DeviceDetailsModal';
 import io from 'Socket.IO-client';
-import { devices } from '../../mockedAPIdata/devices';
 
 export default function DevicesList(): ReactElement {
   const [isDeviceDetailsModalVisible, setIsDeviceDetailsModalVisible] = useState(true);
@@ -18,7 +17,6 @@ export default function DevicesList(): ReactElement {
     });
   };
 
-  console.log(devices);
   useEffect(() => socketInitializer(), []);
 
   const handleModalClose = () => setIsDeviceDetailsModalVisible(false);
