@@ -1,10 +1,23 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import DeviceCard from './DeviceCard/DeviceCard';
 import styles from './DevicesList.module.scss';
 import DeviceDetailsModal from '../DeviceDetailsModal/DeviceDetailsModal';
+import io from 'Socket.IO-client';
 
 export default function DevicesList(): ReactElement {
   const [isDeviceDetailsModalVisible, setIsDeviceDetailsModalVisible] = useState(true);
+  let socket;
+
+  const socketInitializer = async () => {
+    await fetch('/api/v1/refresh');
+    socket = io();
+
+    socket.on('connect', () => {
+      console.log('connected');
+    });
+  };
+
+  useEffect(() => socketInitializer(), []);
 
   const handleModalClose = () => setIsDeviceDetailsModalVisible(false);
   return (

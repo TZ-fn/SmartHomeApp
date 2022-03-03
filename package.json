@@ -14,12 +14,14 @@
     "next": "12.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "ws": "^8.5.0"
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1"
   },
   "devDependencies": {
     "@interactjs/types": "^1.10.11",
     "@types/node": "17.0.19",
     "@types/react": "17.0.39",
+    "@types/ws": "^8.5.2",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "eslint": "8.9.0",
     "eslint-config-next": "12.1.0",
