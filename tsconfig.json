@@ -20,6 +20,12 @@
     "strictNullChecks": true,
     "noImplicitAny": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.js"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/_document.js",
+    "server/webSocketServer.js"
+  ],
   "exclude": ["node_modules"]
 }
