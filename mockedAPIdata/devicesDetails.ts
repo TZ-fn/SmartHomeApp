@@ -6,7 +6,7 @@ const minTemperature = -10;
 const maxTemperature = 40;
 
 function isTurnedOn() {
-  return Math.random() > 0.75 ? true : false;
+  return Math.random() < 0.75 ? true : false;
 }
 
 function setBrightness() {
@@ -55,29 +55,35 @@ interface SmartTemperatureSensor {
   temperature: number; // in Celsius
 }
 
-export const SmartBulb: SmartBulb = {
-  type: 'bulb',
-  id: '1f711ad4-6d2f-4b4d-8fba-52590dd32c79',
-  name: 'Smart Bulb',
-  connectionState: setConnectionState(),
-  isTurnedOn: isTurnedOn(),
-  brightness: setBrightness(),
-  color: setRandomHSLColor(),
+export const createSmartBulb = (): SmartBulb => {
+  return {
+    type: 'bulb',
+    id: '1f711ad4-6d2f-4b4d-8fba-52590dd32c79',
+    name: 'Smart Bulb',
+    connectionState: setConnectionState(),
+    isTurnedOn: isTurnedOn(),
+    brightness: setBrightness(),
+    color: setRandomHSLColor(),
+  };
 };
 
-export const SmartOutlet: SmartOutlet = {
-  type: 'outlet',
-  id: 'c4c48095-b135-401f-ab22-b09b83e37c42',
-  name: 'Smart Outlet',
-  connectionState: setConnectionState(),
-  isTurnedOn: isTurnedOn(),
-  powerConsumption: setPowerConsumption(),
+export const createSmartOutlet = (): SmartOutlet => {
+  return {
+    type: 'outlet',
+    id: 'c4c48095-b135-401f-ab22-b09b83e37c42',
+    name: 'Smart Outlet',
+    connectionState: setConnectionState(),
+    isTurnedOn: isTurnedOn(),
+    powerConsumption: setPowerConsumption(),
+  };
 };
 
-export const SmartTemperatureSensor: SmartTemperatureSensor = {
-  type: 'temperatureSensor',
-  id: '9176955d-cf81-483d-846a-35400f3705f7',
-  name: 'Smart Temperature Sensor',
-  connectionState: setConnectionState(),
-  temperature: setTemperature(),
+export const createSmartTemperatureSensor = (): SmartTemperatureSensor => {
+  return {
+    type: 'temperatureSensor',
+    id: '9176955d-cf81-483d-846a-35400f3705f7',
+    name: 'Smart Temperature Sensor',
+    connectionState: setConnectionState(),
+    temperature: setTemperature(),
+  };
 };
