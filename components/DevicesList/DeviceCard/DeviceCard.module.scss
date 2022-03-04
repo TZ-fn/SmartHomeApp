@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: flex-start;
   text-align: center;
-  min-height: 10rem;
+  min-height: 12rem;
   height: min-content;
   width: 12rem;
   padding: 1rem 0;
@@ -38,6 +38,10 @@
   color: var(--gray);
 }
 
+.connectionState {
+  margin-top: 0.5rem;
+}
+
 .connectionStateIcon {
   display: block;
   position: absolute;
@@ -60,11 +64,17 @@
   background-color: var(--color-poor-connection);
 }
 
-.visuallyHidden {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+.connectionStateText {
+  margin-left: 0.3rem;
+  font-weight: 600;
+}
+
+.textConnected {
+  color: var(--color-connected);
+}
+.textDisconnected {
+  color: var(--color-disconnected);
+}
+.textPoorConnection {
+  color: var(--color-poor-connection);
 }

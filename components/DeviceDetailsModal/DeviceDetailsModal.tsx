@@ -2,6 +2,7 @@ import { MouseEventHandler, ReactElement, useEffect, useState } from 'react';
 import interact from 'interactjs';
 import styles from './DeviceDetailsModal.module.scss';
 import { connectionStateMatcher } from '../utils/connectionStateMatcher';
+import { setConnectionStatusColor } from '../utils/setConnectionStatusColor';
 
 type ConnectionStateType = 'connected' | 'disconnected' | 'poorConnection';
 
@@ -35,13 +36,6 @@ export default function DeviceDetailsModal({
 }: DeviceDetailsModalProps): ReactElement | null {
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const [modalSize, setModalSize] = useState({ width: 0, height: 0 });
-
-  const setConnectionStatusColor =
-    connectionState === 'connected'
-      ? 'textConnected'
-      : connectionState === 'disconnected'
-      ? 'textDisconnected'
-      : 'textPoorConnection';
 
   useEffect(() => {
     interact('.resize-drag')
@@ -99,13 +93,14 @@ export default function DeviceDetailsModal({
         <p className={styles.modalDeviceName}>Smart Temperature Sensor</p>
         <p className={styles.modalDeviceID}>ID: E78C0467EF</p>
         <p className={styles.modalConnectionState}>
-          Connection:
           <span
-            className={`${styles.modalConnectionStateText} ${styles[setConnectionStatusColor]}`}
+            className={`${styles.modalConnectionStateText} ${
+              styles[setConnectionStatusColor(connectionState)]
+            }`}
           >
             {connectionStateMatcher(connectionState)}
           </span>
-          .<span className={`${styles.modalConnectionStateIcon} ${styles[connectionState]}`}></span>
+          <span className={`${styles.modalConnectionStateIcon} ${styles[connectionState]}`}></span>
         </p>
         <p>isTurnedOn</p>
         <p>brightness</p>
