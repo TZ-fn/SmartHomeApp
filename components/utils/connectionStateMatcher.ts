@@ -1,7 +1,7 @@
 export const connectionStateMatcher = (connectionState: string): string => {
   return connectionState === 'connected'
-    ? 'connected successfully'
+    ? 'Connected successfully.'
     : connectionState === 'disconnected'
-    ? 'disconnected'
-    : 'connection poor';
+    ? 'Disconnected.'
+    : 'Connection poor.';
 };
