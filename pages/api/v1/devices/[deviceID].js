@@ -13,8 +13,6 @@ export default function SmartDeviceDetails(req, res) {
   const IDquery = req.query.deviceID;
 
   const filteredDevices = allDevicesDetails.filter((device) => device.id === IDquery);
-  console.log(req.query.deviceID);
-  console.log(filteredDevices);
 
-  res.status(200).json(filteredDevices);
+  res.status(200).json(...filteredDevices);
 }

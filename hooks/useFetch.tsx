@@ -20,5 +20,5 @@ export const useFetch = (APIurl: string) => {
     fetchData();
   }, [APIurl]);
 
-  return [data];
+  return data;
 };
