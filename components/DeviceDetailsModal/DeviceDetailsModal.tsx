@@ -14,6 +14,7 @@ type Range<T extends number> = number extends T ? number : _Range<T, []>;
 type BrightnessType = Range<100>;
 
 interface DeviceDetailsModalProps {
+  id: string;
   isModalVisible: boolean;
   handleClose: MouseEventHandler;
   connectionState: ConnectionStateType;
@@ -25,8 +26,9 @@ interface DeviceDetailsModalProps {
 }
 
 export default function DeviceDetailsModal({
-  handleClose,
+  id,
   isModalVisible,
+  handleClose,
   connectionState,
   isTurnedOn,
   brightness,
@@ -36,6 +38,9 @@ export default function DeviceDetailsModal({
 }: DeviceDetailsModalProps): ReactElement | null {
   const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const [modalSize, setModalSize] = useState({ width: 0, height: 0 });
+
+  const isTurnedOnToText = isTurnedOn === true ? 'Device turned on.' : 'Device is turned off.';
+  const getIsTurnedOnClassName = isTurnedOn ? 'deviceOn' : 'deviceOff';
 
   useEffect(() => {
     interact('.resize-drag')
@@ -91,7 +96,7 @@ export default function DeviceDetailsModal({
           <span aria-hidden='true'>×</span>
         </button>
         <p className={styles.modalDeviceName}>Smart Temperature Sensor</p>
-        <p className={styles.modalDeviceID}>ID: E78C0467EF</p>
+        <p className={styles.modalDeviceID}>ID: {id}</p>
         <p className={styles.modalConnectionState}>
           <span
             className={`${styles.modalConnectionStateText} ${
@@ -102,11 +107,33 @@ export default function DeviceDetailsModal({
           </span>
           <span className={`${styles.modalConnectionStateIcon} ${styles[connectionState]}`}></span>
         </p>
-        <p>isTurnedOn</p>
-        <p>brightness</p>
-        <p>color</p>
-        <p>powerConsumption</p>
-        <p>temperature</p>
+        {typeof isTurnedOn === 'boolean' && (
+          <p className={styles.detailsItem}>
+            <span className={styles[getIsTurnedOnClassName]}>{isTurnedOnToText}</span>
+          </p>
+        )}
+        {typeof brightness === 'number' && (
+          <p className={styles.detailsItem}>Brightness level: {brightness}</p>
+        )}
+        {color && (
+          <div className={styles.detailsItem}>
+            Color:
+            <span
+              style={{
+                backgroundColor: color,
+              }}
+              className={styles.colorPreview}
+            >
+              {color}
+            </span>
+          </div>
+        )}
+        {typeof powerConsumption === 'number' && (
+          <p className={styles.detailsItem}>Power consumption: {powerConsumption} watts</p>
+        )}
+        {typeof temperature === 'number' && (
+          <p className={styles.detailsItem}>Temperature: {temperature}°C</p>
+        )}
       </div>
     </div>
   ) : null;
