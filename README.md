@@ -1,5 +1,7 @@
 # SmartHome App
 
+![Screenshot of the app](https://github.com/TZ-fn/SmartHomeApp/blob/main/public/smart-home-app-dashboard.herokuapp.com_.png)
+
 ## About
 
 This is a simple control panel for smart home devices. The app renders a list of devices using a mocked API call, if you click a device a modal with clicked device's details will appear.
