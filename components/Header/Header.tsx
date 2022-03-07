@@ -9,16 +9,16 @@ export default function Header(): ReactElement {
   return (
     <header className={styles.headerContainer}>
       <div className={styles.logoContainer}>
-        <Image layout='fixed' height={70} width={70} src={SmartHomeLogo.src} />
+        <Image layout='fixed' height={70} width={70} src={SmartHomeLogo.src} alt='' />
         <h1>SmartHome</h1>
       </div>
       <div className={styles.controlPanelContainer}>
         <div>
-          <Image height={33} width={33} src={LoginIcon.src} />
+          <Image height={33} width={33} src={LoginIcon.src} alt='' />
           <p>Login/Account</p>
         </div>
         <div>
-          <Image height={33} width={33} src={SettingsIcon.src} />
+          <Image height={33} width={33} src={SettingsIcon.src} alt='' />
           <p>Settings</p>
         </div>
       </div>

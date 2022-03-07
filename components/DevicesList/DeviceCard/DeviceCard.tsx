@@ -42,7 +42,7 @@ export default function DeviceCard({
 
   return (
     <div data-deviceid={id} className={styles.cardContainer} onClick={(e) => onClick(e)}>
-      <Image width={55} height={55} src={selectIconType(type)} />
+      <Image width={55} height={55} src={selectIconType(type)} alt={`${name}'s icon.`} />
       <p className={styles.deviceName}>{name}</p>
       <p className={styles.deviceID}>ID: {id}</p>
       <p className={styles.connectionState}>
