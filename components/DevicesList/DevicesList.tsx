@@ -6,7 +6,7 @@ import DeviceDetailsModal from '../DeviceDetailsModal/DeviceDetailsModal';
 import { SmartDevice } from '../../mockedAPIdata/devices';
 import { useFetch } from '../../hooks/useFetch';
 import { socketEvents } from '../../utils/socketEvents';
-import { Socket, io } from 'Socket.IO-client';
+import { Socket, io } from 'socket.io-client';
 export default function DevicesList(): ReactElement {
   const [isDeviceDetailsModalVisible, setIsDeviceDetailsModalVisible] = useState(false);
   const [modalData, setModalData] = useState<SmartDevice[]>();
