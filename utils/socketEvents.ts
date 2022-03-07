@@ -7,11 +7,13 @@ export const socketEvents = {
     SmartTemperatureSensor: 'refresh-SmartTemperatureSensor',
   },
 
-  update: {
-    SmartBulb: 'update-SmartBulb',
-    SmartOutlet: 'update-SmartOutlet',
-    SmartTemperatureSensor: 'update-SmartTemperatureSensor',
+  devices: {
+    '1f711ad4-6d2f': 'SmartBulb',
+    'c4c48095-b135': 'SmartOutlet',
+    '9176955d-cf81': 'SmartTemperatureSensor',
   },
+
+  updateDevice: 'update-device',
 
   stopRefreshing: 'stop-refreshing',
 };

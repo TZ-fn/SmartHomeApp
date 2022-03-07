@@ -4,8 +4,8 @@ import styles from './DeviceCard.module.scss';
 import BulbIcon from '../../../public/icons/reshot-icon-electric-bulb-BZU4KM2VQA.svg';
 import OutletIcon from '../../../public/icons/reshot-icon-plug-and-socket-ANZ3VHW8SC.svg';
 import TemperatureSensorIcon from '../../../public/icons/reshot-icon-thermometer-45AGZRX8JW.svg';
-import { connectionStateMatcher } from '../../utils/connectionStateMatcher';
-import { setConnectionStatusColor } from '../../utils/setConnectionStatusColor';
+import { connectionStateMatcher } from '../../../utils/connectionStateMatcher';
+import { setConnectionStatusColor } from '../../../utils/setConnectionStatusColor';
 
 type DeviceType = 'bulb' | 'outlet' | 'temperatureSensor';
 

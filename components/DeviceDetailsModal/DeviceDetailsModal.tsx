@@ -1,8 +1,8 @@
 import { MouseEventHandler, ReactElement, useEffect, useState } from 'react';
 import interact from 'interactjs';
 import styles from './DeviceDetailsModal.module.scss';
-import { connectionStateMatcher } from '../utils/connectionStateMatcher';
-import { setConnectionStatusColor } from '../utils/setConnectionStatusColor';
+import { connectionStateMatcher } from '../../utils/connectionStateMatcher';
+import { setConnectionStatusColor } from '../../utils/setConnectionStatusColor';
 
 type ConnectionStateType = 'connected' | 'disconnected' | 'poorConnection';
 
