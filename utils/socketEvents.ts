@@ -1,10 +1,10 @@
 export const socketEvents = {
   connection: 'connection',
 
-  refresh: {
-    SmartBulb: 'refresh-SmartBulb',
-    SmartOutlet: 'refresh-SmartOutlet',
-    SmartTemperatureSensor: 'refresh-SmartTemperatureSensor',
+  id: {
+    SmartBulb: 'SmartBulb',
+    SmartOutlet: 'SmartOutlet',
+    SmartTemperatureSensor: 'SmartTemperatureSensor',
   },
 
   devices: {

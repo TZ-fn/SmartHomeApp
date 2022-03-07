@@ -4,33 +4,36 @@ import {
   createSmartOutlet,
   createSmartTemperatureSensor,
 } from '../../../mockedAPIdata/devicesDetails';
+import { socketEvents } from '../../../utils/socketEvents';
 
 const SocketHandler = (req, res) => {
-  if (res.socket.server.io) {
-    console.log('Socket is already running');
-  } else {
-    console.log('Socket is initializing');
+  if (!res.socket.server.io) {
     const io = new Server(res.socket.server);
     res.socket.server.io = io;
 
     io.on('connection', (socket) => {
       let updateInterval;
 
-      socket.on('refresh-SmartBulb', () => {
-        updateInterval = setInterval(() => {
-          socket.emit('update-SmartBulb', createSmartBulb());
-        }, 3000);
-      });
-
-      socket.on('stop-refreshing', () => {
+      socket.on(socketEvents.stopRefreshing, () => {
         clearInterval(updateInterval);
       });
 
-      socket.on('refresh-SmartOutlet', () => {
-        socket.emit('update-SmartOutlet', SmartOutlet);
+      socket.on(socketEvents.id.SmartBulb, () => {
+        updateInterval = setInterval(() => {
+          socket.emit(socketEvents.updateDevice, createSmartBulb());
+        }, 3000);
       });
-      socket.on('refresh-SmartTemperatureSensor', () => {
-        socket.emit('update-SmartTemperatureSensor', SmartTemperatureSensor);
+
+      socket.on(socketEvents.id.SmartOutlet, () => {
+        updateInterval = setInterval(() => {
+          socket.emit(socketEvents.updateDevice, createSmartOutlet());
+        }, 3000);
+      });
+
+      socket.on(socketEvents.id.SmartTemperatureSensor, () => {
+        updateInterval = setInterval(() => {
+          socket.emit(socketEvents.updateDevice, createSmartTemperatureSensor());
+        }, 3000);
       });
     });
   }

@@ -1,48 +1,53 @@
+// @ts-nocheck
 import { MouseEvent, ReactElement, useEffect, useState } from 'react';
 import DeviceCard from './DeviceCard/DeviceCard';
 import styles from './DevicesList.module.scss';
 import DeviceDetailsModal from '../DeviceDetailsModal/DeviceDetailsModal';
-import { SmartDeviceDetails } from '../../mockedAPIdata/devicesDetails';
+import { SmartDevice } from '../../mockedAPIdata/devices';
 import { useFetch } from '../../hooks/useFetch';
-import io from 'Socket.IO-client';
-
+import { socketEvents } from '../../utils/socketEvents';
+import { Socket, io } from 'Socket.IO-client';
 export default function DevicesList(): ReactElement {
   const [isDeviceDetailsModalVisible, setIsDeviceDetailsModalVisible] = useState(false);
-  const [modalData, setModalData] = useState<SmartDeviceDetails>();
+  const [modalData, setModalData] = useState<SmartDevice[]>();
+  const [activeDevice, setActiveDevice] = useState<string>();
   const devicesData = useFetch('http://localhost:3000/api/v1/devices');
-  let socket;
+  let socket: Socket = io();
+
+  const socketInitializer = async () => {
+    await fetch('/api/v1/refresh');
+
+    if (isDeviceDetailsModalVisible) {
+      if (activeDevice) {
+        console.log(activeDevice);
+        socket.emit(socketEvents.devices[activeDevice]);
+      }
+      socket.on(socketEvents.updateDevice, (device) => {
+        setModalData(device);
+      });
+    }
+  };
+
+  useEffect(() => {
+    socketInitializer();
+    return () => {
+      socket.emit(socketEvents.stopRefreshing);
+    };
+  }, [isDeviceDetailsModalVisible, activeDevice]);
 
   const handleDeviceClick = async (e: MouseEvent) => {
-    const data = await fetch(
-      `http://localhost:3000/api/v1/devices/${e.currentTarget.dataset.deviceid}`,
-    );
+    const target = e.currentTarget as HTMLDivElement;
+    setActiveDevice(target.dataset.deviceid);
+    const data = await fetch(`http://localhost:3000/api/v1/devices/${target.dataset.deviceid}`);
     const parsedData = await data.json();
     setModalData(parsedData);
     setIsDeviceDetailsModalVisible(true);
   };
 
-  const socketInitializer = async () => {
-    await fetch('/api/v1/refresh');
-    socket = io();
-
-    socket.on('connect', () => {
-      console.log('connected');
-    });
-
-    // socket.emit('refresh-SmartBulb');
-
-    setTimeout(() => {
-      socket.emit('stop-refreshing');
-    }, 10000);
-
-    socket.on('update-SmartBulb', (SmartBulb) => {
-      console.log(SmartBulb);
-    });
+  const handleModalClose = () => {
+    setIsDeviceDetailsModalVisible(false);
   };
 
-  useEffect(() => socketInitializer(), []);
-
-  const handleModalClose = () => setIsDeviceDetailsModalVisible(false);
   return (
     <>
       {modalData && (
@@ -50,6 +55,7 @@ export default function DevicesList(): ReactElement {
           isModalVisible={isDeviceDetailsModalVisible}
           handleClose={handleModalClose}
           id={modalData.id}
+          name={modalData.name}
           connectionState={modalData.connectionState}
           isTurnedOn={modalData.isTurnedOn}
           brightness={modalData.brightness}
@@ -59,18 +65,19 @@ export default function DevicesList(): ReactElement {
         />
       )}
       <div className={styles.deviceListContainer}>
-        {devicesData.map(({ type, id, name, connectionState }) => {
-          return (
-            <DeviceCard
-              type={type}
-              id={id}
-              name={name}
-              key={id}
-              connectionState={connectionState}
-              onClick={(e) => handleDeviceClick(e)}
-            />
-          );
-        })}
+        {devicesData !== undefined &&
+          devicesData.map(({ type, id, name, connectionState }) => {
+            return (
+              <DeviceCard
+                type={type}
+                id={id}
+                name={name}
+                key={id}
+                connectionState={connectionState}
+                onClick={(e) => handleDeviceClick(e)}
+              />
+            );
+          })}
       </div>
     </>
   );
