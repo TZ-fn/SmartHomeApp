@@ -33,7 +33,7 @@ export default function DevicesList(): ReactElement {
       socket.emit(socketEvents.stopRefreshing);
       socket.disconnect();
     };
-  }, [isDeviceDetailsModalVisible, activeDevice]);
+  }, [isDeviceDetailsModalVisible, activeDevice, socket]);
 
   const handleDeviceClick = async (e: MouseEvent) => {
     const target = e.currentTarget as HTMLDivElement;

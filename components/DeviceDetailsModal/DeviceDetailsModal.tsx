@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { MouseEventHandler, ReactElement, useEffect, useState } from 'react';
 import interact from 'interactjs';
 import styles from './DeviceDetailsModal.module.scss';
