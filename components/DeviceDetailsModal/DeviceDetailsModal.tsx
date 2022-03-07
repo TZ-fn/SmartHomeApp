@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { MouseEventHandler, ReactElement, useEffect, useState } from 'react';
 import interact from 'interactjs';
 import styles from './DeviceDetailsModal.module.scss';
@@ -15,6 +16,7 @@ type BrightnessType = Range<100>;
 
 interface DeviceDetailsModalProps {
   id: string;
+  name: string;
   isModalVisible: boolean;
   handleClose: MouseEventHandler;
   connectionState: ConnectionStateType;
@@ -27,6 +29,7 @@ interface DeviceDetailsModalProps {
 
 export default function DeviceDetailsModal({
   id,
+  name,
   isModalVisible,
   handleClose,
   connectionState,
@@ -95,7 +98,7 @@ export default function DeviceDetailsModal({
         >
           <span aria-hidden='true'>×</span>
         </button>
-        <p className={styles.modalDeviceName}>Smart Temperature Sensor</p>
+        <p className={styles.modalDeviceName}>{name}</p>
         <p className={styles.modalDeviceID}>ID: {id}</p>
         <p className={styles.modalConnectionState}>
           <span
