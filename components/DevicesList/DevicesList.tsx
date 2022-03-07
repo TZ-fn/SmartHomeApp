@@ -12,7 +12,7 @@ export default function DevicesList(): ReactElement {
   const [modalData, setModalData] = useState<SmartDevice[]>();
   const [activeDevice, setActiveDevice] = useState<string>();
   const devicesData = useFetch('http://localhost:3000/api/v1/devices');
-  let socket: Socket = io();
+  const socket: Socket = io();
 
   const socketInitializer = async () => {
     await fetch('/api/v1/refresh');
