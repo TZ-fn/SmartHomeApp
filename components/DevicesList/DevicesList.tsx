@@ -11,7 +11,7 @@ export default function DevicesList(): ReactElement {
   const [isDeviceDetailsModalVisible, setIsDeviceDetailsModalVisible] = useState(false);
   const [modalData, setModalData] = useState<SmartDevice[]>();
   const [activeDevice, setActiveDevice] = useState<string>();
-  const devicesData = useFetch('http://localhost:3000/api/v1/devices');
+  const devicesData = useFetch('/api/v1/devices');
   const socket: Socket = io();
 
   const socketInitializer = async () => {
@@ -38,7 +38,7 @@ export default function DevicesList(): ReactElement {
   const handleDeviceClick = async (e: MouseEvent) => {
     const target = e.currentTarget as HTMLDivElement;
     setActiveDevice(target.dataset.deviceid);
-    const data = await fetch(`http://localhost:3000/api/v1/devices/${target.dataset.deviceid}`);
+    const data = await fetch(`/api/v1/devices/${target.dataset.deviceid}`);
     const parsedData = await data.json();
     setModalData(parsedData);
     setIsDeviceDetailsModalVisible(true);
