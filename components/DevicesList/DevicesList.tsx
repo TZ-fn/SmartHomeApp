@@ -19,7 +19,6 @@ export default function DevicesList(): ReactElement {
 
     if (isDeviceDetailsModalVisible) {
       if (activeDevice) {
-        console.log(activeDevice);
         socket.emit(socketEvents.devices[activeDevice]);
       }
       socket.on(socketEvents.updateDevice, (device) => {
@@ -32,6 +31,7 @@ export default function DevicesList(): ReactElement {
     socketInitializer();
     return () => {
       socket.emit(socketEvents.stopRefreshing);
+      socket.disconnect();
     };
   }, [isDeviceDetailsModalVisible, activeDevice]);
 
