@@ -34,6 +34,6 @@ Another problem that I encountered was a memory leak caused by not disconnecting
 
 ## TO-DO
 
-Fix TypeScript errors in the DeviceList component.
+~~Fix TypeScript errors in the DeviceList component.~~
 
 Add tests.
