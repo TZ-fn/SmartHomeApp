@@ -1,15 +1,19 @@
-// @ts-nocheck
 import { MouseEvent, ReactElement, useEffect, useState } from 'react';
 import DeviceCard from './DeviceCard/DeviceCard';
 import styles from './DevicesList.module.scss';
-import DeviceDetailsModal from '../DeviceDetailsModal/DeviceDetailsModal';
-import { SmartDevice } from '../../mockedAPIdata/devices';
+import DeviceDetailsModal, {
+  DeviceDetailsModalProps,
+} from '../DeviceDetailsModal/DeviceDetailsModal';
+import { ConnectionStateType } from '../../mockedAPIdata/devices';
 import { useFetch } from '../../hooks/useFetch';
 import { socketEvents } from '../../utils/socketEvents';
 import { Socket, io } from 'socket.io-client';
+
+type activeDeviceIDs = keyof typeof socketEvents.devices;
+
 export default function DevicesList(): ReactElement {
   const [isDeviceDetailsModalVisible, setIsDeviceDetailsModalVisible] = useState(false);
-  const [modalData, setModalData] = useState<SmartDevice[]>();
+  const [modalData, setModalData] = useState<DeviceDetailsModalProps>();
   const [activeDevice, setActiveDevice] = useState<string>();
   const devicesData = useFetch('/api/v1/devices');
   const socket: Socket = io();
@@ -19,7 +23,7 @@ export default function DevicesList(): ReactElement {
 
     if (isDeviceDetailsModalVisible) {
       if (activeDevice) {
-        socket.emit(socketEvents.devices[activeDevice]);
+        socket.emit(socketEvents.devices[activeDevice as activeDeviceIDs]);
       }
       socket.on(socketEvents.updateDevice, (device) => {
         setModalData(device);
@@ -56,7 +60,7 @@ export default function DevicesList(): ReactElement {
           handleClose={handleModalClose}
           id={modalData.id}
           name={modalData.name}
-          connectionState={modalData.connectionState}
+          connectionState={modalData.connectionState as ConnectionStateType}
           isTurnedOn={modalData.isTurnedOn}
           brightness={modalData.brightness}
           color={modalData.color}

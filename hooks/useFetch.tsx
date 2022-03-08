@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { SmartDevice } from '../mockedAPIdata/devices';
 
-export const useFetch = (APIurl: string) => {
+export const useFetch = (APIurl: string): SmartDevice[] | undefined => {
   const [data, setData] = useState();
   useEffect(() => {
     const fetchData = async () => {

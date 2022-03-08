@@ -13,7 +13,7 @@ type Range<T extends number> = number extends T ? number : _Range<T, []>;
 
 type BrightnessType = Range<100>;
 
-interface DeviceDetailsModalProps {
+export interface DeviceDetailsModalProps {
   id: string;
   name: string;
   isModalVisible: boolean;

@@ -26,6 +26,8 @@ export default function DeviceCard({
   connectionState,
   onClick,
 }: DeviceCardProps): ReactElement {
+  // Use any to avoid conflicts with @svgr/webpack plugin or babel-plugin-inline-react-svg plugin.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const selectIconType = (type: DeviceType): any => {
     // I decided to use a switch statement to make adding new devices' types easier
     switch (type) {
