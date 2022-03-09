@@ -10,7 +10,7 @@ Modal auto-updates with mocked data using WebSocket protocol. You can drag and r
 
 ## Live version
 
-The live version can be found [here]('https://smart-home-app-dashboard.herokuapp.com/').
+The live version can be found [here](https://smart-home-app-dashboard.herokuapp.com/).
 
 ## Technologies I used
 
