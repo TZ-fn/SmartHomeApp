@@ -1,9 +1,6 @@
 import { MouseEventHandler, ReactElement } from 'react';
 import Image from 'next/image';
 import styles from './DeviceCard.module.scss';
-import BulbIcon from '../../../public/icons/reshot-icon-electric-bulb-BZU4KM2VQA.svg';
-import OutletIcon from '../../../public/icons/reshot-icon-plug-and-socket-ANZ3VHW8SC.svg';
-import TemperatureSensorIcon from '../../../public/icons/reshot-icon-thermometer-45AGZRX8JW.svg';
 import { connectionStateMatcher } from '../../../utils/connectionStateMatcher';
 import { setConnectionStatusColor } from '../../../utils/setConnectionStatusColor';
 
@@ -32,11 +29,11 @@ export default function DeviceCard({
     // I decided to use a switch statement to make adding new devices' types easier
     switch (type) {
       case 'bulb':
-        return BulbIcon.src;
+        return '/icons/reshot-icon-electric-bulb-BZU4KM2VQA.svg';
       case 'outlet':
-        return OutletIcon.src;
+        return '/icons/reshot-icon-plug-and-socket-ANZ3VHW8SC.svg';
       case 'temperatureSensor':
-        return TemperatureSensorIcon.src;
+        return '/icons/reshot-icon-thermometer-45AGZRX8JW.svg';
       default:
         throw new Error('Unsupported device type.');
     }
