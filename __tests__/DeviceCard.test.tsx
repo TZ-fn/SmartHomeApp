@@ -32,8 +32,25 @@ describe('Tests for the DeviceCard component', () => {
         onClick={(e) => e}
       />,
     );
-    const deviceName = RegExp(`${deviceNames.smartBulb}`);
+    const deviceName = RegExp(deviceNames.smartBulb);
     expect(screen.getByText(deviceName)).toBeInTheDocument();
+  });
+
+  it('is styled properly', () => {
+    render(
+      <DeviceCard
+        type={deviceTypes.bulb as SmartDeviceType}
+        id={'1'}
+        name={deviceNames.smartBulb}
+        key={'1'}
+        connectionState={connectionStates.disconnected as ConnectionStateType}
+        onClick={(e) => e}
+      />,
+    );
+    const connectionInfo = screen.getByText(/Disconnected/);
+    // console.log(window.getComputedStyle(connectionInfo));
+    console.log(screen);
+    expect(connectionInfo).toHaveStyle('visibility: visible;');
   });
 
   // it('renders the user control icons correctly', () => {
