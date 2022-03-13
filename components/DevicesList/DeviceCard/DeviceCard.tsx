@@ -40,7 +40,7 @@ export default function DeviceCard({
   };
 
   return (
-    <div data-deviceid={id} className={styles.cardContainer} onClick={(e) => onClick(e)}>
+    <li data-deviceid={id} className={styles.cardContainer} onClick={(e) => onClick(e)}>
       <Image width={55} height={55} src={selectIconType(type)} alt={`${name}'s icon.`} />
       <p className={styles.deviceName}>{name}</p>
       <p className={styles.deviceID}>ID: {id}</p>
@@ -54,6 +54,6 @@ export default function DeviceCard({
         </span>
         <span className={`${styles.connectionStateIcon} ${styles[connectionState]}`}></span>
       </p>
-    </div>
+    </li>
   );
 }

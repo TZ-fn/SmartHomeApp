@@ -68,7 +68,7 @@ export default function DevicesList(): ReactElement {
           temperature={modalData.temperature}
         />
       )}
-      <div className={styles.deviceListContainer}>
+      <ul className={styles.deviceListContainer}>
         {devicesData !== undefined &&
           devicesData.map(({ type, id, name, connectionState }) => {
             return (
@@ -82,7 +82,7 @@ export default function DevicesList(): ReactElement {
               />
             );
           })}
-      </div>
+      </ul>
     </>
   );
 }
