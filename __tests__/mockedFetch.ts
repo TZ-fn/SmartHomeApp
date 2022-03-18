@@ -1,7 +1,7 @@
 import { createDevices } from '../mockedAPIdata/devices';
 import { createSmartOutlet } from '../mockedAPIdata/devicesDetails';
 
-export function mockedFetch(request: string) {
+export function mockedFetch(request: RequestInfo) {
   if (request === '/api/v1/devices') {
     return Promise.resolve({
       status: 200,

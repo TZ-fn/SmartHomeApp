@@ -1,8 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { fireEvent, waitFor } from '@testing-library/dom';
+import { fireEvent } from '@testing-library/dom';
 import DevicesList from '../components/DevicesList/DevicesList';
-import { deviceTypes, deviceNames, connectionStates } from './mockedTestsData';
-import { ConnectionStateType, SmartDeviceType } from '../mockedAPIdata/devices';
 
 describe('Tests for the DataList component', () => {
   it('renders correctly', async () => {
