@@ -14,4 +14,5 @@ export function mockedFetch(request: string) {
       json: () => Promise.resolve(createSmartOutlet()),
     } as Response);
   }
+  return Promise.resolve({} as Response);
 }
