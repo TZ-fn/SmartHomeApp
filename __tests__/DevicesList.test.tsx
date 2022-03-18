@@ -1,33 +1,22 @@
 import { render, screen } from '@testing-library/react';
 import { fireEvent, waitFor } from '@testing-library/dom';
 import DevicesList from '../components/DevicesList/DevicesList';
-import DeviceCard from '../components/DevicesList/DeviceCard/DeviceCard';
 import { deviceTypes, deviceNames, connectionStates } from './mockedTestsData';
 import { ConnectionStateType, SmartDeviceType } from '../mockedAPIdata/devices';
 
 describe('Tests for the DataList component', () => {
-  it('renders correctly', () => {
+  it('renders correctly', async () => {
     render(<DevicesList />);
-    expect(screen.getAllByRole('li')).toHaveLength(3);
+    // it should have three cards (list items)
+    expect(await screen.findAllByRole('listitem')).toHaveLength(3);
   });
 
-  // it('opens a modal when clicked', async () => {
-  //   render(
-  //     <DeviceCard
-  //       type={deviceTypes.bulb as SmartDeviceType}
-  //       id={'1'}
-  //       name={deviceNames.smartBulb}
-  //       key={'1'}
-  //       connectionState={connectionStates.disconnected as ConnectionStateType}
-  //       onClick={(e) => e}
-  //     />,
-  //   );
-  //   const deviceCardName = new RegExp(deviceNames.smartBulb);
-  //   const deviceCard = screen.getByText(deviceCardName);
-  //   fireEvent.click(deviceCard);
-  //   await waitFor(() => {
-  //     console.log(screen.debug());
-  //     expect(screen.getAllByText(deviceCardName)).toHaveLength(2);
-  //   });
-  // });
+  it('opens a modal when clicked', async () => {
+    render(<DevicesList />);
+    // get the Smart Outlet card
+    const deviceCard = await screen.findByText(/c4c48095-b135/);
+    fireEvent.click(deviceCard);
+    // details for the Smart Outlet have a 'Power consumption' field
+    expect(await screen.findByText(/Power consumption/)).toBeInTheDocument();
+  });
 });
