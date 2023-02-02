@@ -13,7 +13,7 @@ export default function SmartDeviceDetails(req: NextApiRequest, res: NextApiResp
   ];
   const IDquery = req.query.deviceID;
 
-  const filteredDevices = allDevicesDetails.filter((device) => device.id === IDquery);
+  const filteredDevice = allDevicesDetails.find((device) => device.id === IDquery);
 
-  res.status(200).json([...filteredDevices]);
+  res.status(200).json(filteredDevice);
 }
