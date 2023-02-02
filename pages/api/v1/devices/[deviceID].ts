@@ -1,10 +1,11 @@
+import { NextApiRequest, NextApiResponse } from 'next/types';
 import {
   createSmartBulb,
   createSmartOutlet,
   createSmartTemperatureSensor,
 } from '../../../../mockedAPIdata/devicesDetails';
 
-export default function SmartDeviceDetails(req, res) {
+export default function SmartDeviceDetails(req: NextApiRequest, res: NextApiResponse) {
   const allDevicesDetails = [
     createSmartBulb(),
     createSmartOutlet(),
@@ -14,5 +15,5 @@ export default function SmartDeviceDetails(req, res) {
 
   const filteredDevices = allDevicesDetails.filter((device) => device.id === IDquery);
 
-  res.status(200).json(...filteredDevices);
+  res.status(200).json([...filteredDevices]);
 }

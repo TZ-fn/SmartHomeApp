@@ -1,4 +1,8 @@
 import { Server } from 'socket.io';
+import type { Server as HTTPServer } from 'http';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import type { Socket as NetSocket } from 'net';
+import type { Server as IOServer } from 'socket.io';
 import {
   createSmartBulb,
   createSmartOutlet,
@@ -6,13 +10,25 @@ import {
 } from '../../../mockedAPIdata/devicesDetails';
 import { socketEvents } from '../../../utils/socketEvents';
 
-const SocketHandler = (req, res) => {
-  if (!res.socket.server.io) {
+interface SocketServer extends HTTPServer {
+  io?: IOServer | undefined;
+}
+
+interface SocketWithIO extends NetSocket {
+  server: SocketServer;
+}
+
+interface NextApiResponseWithSocket extends NextApiResponse {
+  socket: SocketWithIO;
+}
+
+const SocketHandler = (_req: NextApiRequest, res: NextApiResponseWithSocket) => {
+  if (res.socket && !res.socket.server.io) {
     const io = new Server(res.socket.server);
     res.socket.server.io = io;
 
     io.on('connection', (socket) => {
-      let updateInterval;
+      let updateInterval: NodeJS.Timeout;
 
       socket.on(socketEvents.stopRefreshing, () => {
         clearInterval(updateInterval);
